@@ -55,3 +55,43 @@ def findRotatedIndex(arr, target):
     The function should return the index of num in the array. If the value is not found, return -1.
     """
     return 'something'
+
+def findRotationCount(arr):
+    """
+    Write a function called findRotationCount which accepts an array of distinct numbers
+    sorted in increasing order. The array has been rotated counter-clockwise n number of times.
+    Given such an array, find the value of n.
+    """
+    leftIdx = 0
+    rightIdx = len(arr) - 1
+    while leftIdx < rightIdx:
+        middleIdx = floor((rightIdx + leftIdx) / 2)
+        if arr[middleIdx] > arr[rightIdx]:
+            leftIdx = middleIdx + 1
+        elif arr[middleIdx] < arr[rightIdx]:
+            rightIdx = middleIdx
+    return leftIdx
+
+def findFloor(arr, target):
+    """
+    Write a function called findFloor which accepts a sorted array and a value x,
+    and returns the floor of x in the array.
+    The floor of x in an array is the largest element in the array which is smaller than
+    or equal to x. If the floor does not exist, return -1.
+    """
+    if arr[0] > target:
+        return -1
+    leftIdx = 0
+    rightIdx = len(arr) - 1
+    while leftIdx < rightIdx:
+        middleIdx = floor((rightIdx + leftIdx) / 2)
+        if arr[middleIdx] == target:
+            return arr[middleIdx]
+        elif arr[middleIdx] > target:
+            rightIdx = middleIdx - 1
+        elif arr[middleIdx] < target:
+            if arr[middleIdx + 1] < target:
+                leftIdx = middleIdx + 1
+            else:
+                return arr[middleIdx]
+    return arr[leftIdx]
