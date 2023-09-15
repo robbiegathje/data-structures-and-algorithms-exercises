@@ -54,7 +54,22 @@ def findRotatedIndex(arr, target):
     which accepts a rotated array of sorted numbers and an integer.
     The function should return the index of num in the array. If the value is not found, return -1.
     """
-    return 'something'
+    pivot = findRotationCount(arr) - 1
+    leftIdx = 0
+    rightIdx = len(arr) - 1
+    if target > arr[rightIdx]:
+        rightIdx = pivot
+    elif target < arr[rightIdx]:
+        leftIdx = pivot + 1
+    while leftIdx <= rightIdx:
+        middleIdx = floor((rightIdx + leftIdx) / 2)
+        if arr[middleIdx] == target:
+            return middleIdx
+        elif arr[middleIdx] > target:
+            rightIdx = middleIdx - 1
+        elif arr[middleIdx] < target:
+            leftIdx = middleIdx + 1
+    return -1
 
 def findRotationCount(arr):
     """
