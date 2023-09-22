@@ -1,35 +1,75 @@
 /** TreeNode: node for a general tree. */
 
 class TreeNode {
-  constructor(val, children = []) {
-    this.val = val;
-    this.children = children;
-  }
+	constructor(val, children = []) {
+		this.val = val;
+		this.children = children;
+	}
 }
 
 class Tree {
-  constructor(root = null) {
-    this.root = root;
-  }
+	constructor(root = null) {
+		this.root = root;
+	}
 
-  /** sumValues(): add up all of the values in the tree. */
+	/** sumValues(): add up all of the values in the tree. */
 
-  sumValues() {
-    
-  }
+	sumValues() {
+		let toVisitStack = [this.root];
+		let sum = 0;
 
-  /** countEvens(): count all of the nodes in the tree with even values. */
+		while (this.root && toVisitStack.length > 0) {
+			let current = toVisitStack.pop();
 
-  countEvens() {
+			sum += current.val;
 
-  }
+			for (let child of current.children) {
+				toVisitStack.push(child);
+			}
+		}
+		return sum;
+	}
 
-  /** numGreater(lowerBound): return a count of the number of nodes
-   * whose value is greater than lowerBound. */
+	/** countEvens(): count all of the nodes in the tree with even values. */
 
-  numGreater(lowerBound) {
+	countEvens() {
+		let toVisitStack = [this.root];
+		let evensCount = 0;
 
-  }
+		while (this.root && toVisitStack.length > 0) {
+			let current = toVisitStack.pop();
+
+			if (current.val % 2 === 0) {
+				evensCount++;
+			}
+
+			for (let child of current.children) {
+				toVisitStack.push(child);
+			}
+		}
+		return evensCount;
+	}
+
+	/** numGreater(lowerBound): return a count of the number of nodes
+	 * whose value is greater than lowerBound. */
+
+	numGreater(lowerBound) {
+		let toVisitStack = [this.root];
+		let numsGreater = 0;
+
+		while (this.root && toVisitStack.length > 0) {
+			let current = toVisitStack.pop();
+
+			if (current.val > lowerBound) {
+				numsGreater++;
+			}
+
+			for (let child of current.children) {
+				toVisitStack.push(child);
+			}
+		}
+		return numsGreater;
+	}
 }
 
 module.exports = { Tree, TreeNode };
